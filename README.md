@@ -1,2 +1,2 @@
 # atcoder-submissions
-AtCoderで提出したコードを置いておくためのリポジトリ
+AtCoderで提出したコードを保管するリポジトリ
