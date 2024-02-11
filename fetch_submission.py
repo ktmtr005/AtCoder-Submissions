@@ -1,24 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
-
-
 import requests
 import json
-
-
-# In[4]:
-
 
 userID = "ktmtrtr" # 自分のAtCoderのユーザーIDを設定する
 unix_second = 0
 api_path = "https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=" + userID + "&from_second=" + str(unix_second)
-
-
-
-# In[5]:
-
 
 # APIを用いた提出データの取得
 def getSubmissionData(userID):
@@ -27,16 +15,7 @@ def getSubmissionData(userID):
     jsonData = response.json()
     return jsonData
 
-
-# In[6]:
-
-
 submissions = getSubmissionData(userID)
-submissions[:2]
-
-
-# In[7]:
-
 
 # 各問題において最も新しいAC提出のみを取得する
 # 各コンテストごとにまとめて返す
@@ -55,32 +34,15 @@ def collectNewestAcceptedSubmissions(submissions):
         result[sub["contest_id"]].append(sub)
     return result
 
-
-# In[8]:
-
-
 newestSubmits =  collectNewestAcceptedSubmissions(submissions)
-newestSubmits["abc168"][0]
-
-
-# In[9]:
-
 
 import os
-
-
-# In[10]:
-
 
 root = "submissions/"
 
 for contestName in newestSubmits:
     path = root + contestName
     os.makedirs(path, exist_ok=True)
-
-
-# In[11]:
-
 
 import re
 import html
@@ -90,10 +52,6 @@ from selenium.webdriver.common.by import By
 from time import sleep
 import subprocess
 
-
-# In[14]:
-
-
 driver = webdriver.Chrome()
 
 # 追加したファイルの数を増やす
@@ -102,7 +60,7 @@ add_cnt = 0
 for submissions in newestSubmits.values():
     for sub in submissions:
         # 問題番号の取得
-        problem_num = sub["problem_id"][-1]
+        problem_num = sub["problem_id"]
         
         # 古い問題の場合には数字になっているので、アルファベットに戻す
         if problem_num.isdigit():
@@ -145,10 +103,6 @@ for submissions in newestSubmits.values():
         
 driver.quit()
 
-
-# In[16]:
-
-
 if add_cnt == 0:
     # 何も追加していなければGitにアクセスしない
     print("No added submissions, end process")
@@ -158,7 +112,7 @@ else:
     import datetime
 
     dt_now = datetime.datetime.now()
-    repo_url = "git@github.com:ktmtr005/atcoder-submissions.git"
+    repo_url = "git@github.com:ktmtr005/AtCoder-Submissions.git"
     repo = git.Repo()
     repo.git.add("submissions/*")
     repo.git.commit("submissions/*", message="add submission: " + dt_now.strftime('%Y/%m/%d %H:%M:%S'))

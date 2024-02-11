@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 driver = webdriver.Chrome()  # または他のブラウザに合わせて選択
 
 # 対象のウェブページを開く
-url = "https://atcoder.jp/contests/abc340/submissions/50153564"  # Aceエディタが埋め込まれているページのURLに変更
+url = "https://example.com"  # Aceエディタが埋め込まれているページのURLに変更
 driver.get(url)
 
 # Aceエディタの要素を特定するためのセレクタを指定
