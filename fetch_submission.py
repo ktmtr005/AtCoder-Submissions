@@ -4,7 +4,13 @@
 import requests
 import json
 
-userID = "ktmtrtr" # 自分のAtCoderのユーザーIDを設定する
+conf_dir = "conf.json"
+with open(conf_dir, mode="rt", encoding="utf-8") as f:
+    config = json.load(f)
+
+userID = config["userID"]
+repo_url = config["repo_url"]
+
 unix_second = 0
 api_path = "https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=" + userID + "&from_second=" + str(unix_second)
 
@@ -112,7 +118,6 @@ else:
     import datetime
 
     dt_now = datetime.datetime.now()
-    repo_url = "git@github.com:ktmtr005/AtCoder-Submissions.git"
     repo = git.Repo()
     repo.git.add("submissions/*")
     repo.git.commit("submissions/*", message="add submission: " + dt_now.strftime('%Y/%m/%d %H:%M:%S'))
