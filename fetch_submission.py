@@ -52,7 +52,6 @@ for contestName in newestSubmits:
 
 import re
 import html
-import chromedriver_binary
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
