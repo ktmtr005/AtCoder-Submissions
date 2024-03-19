@@ -13,4 +13,4 @@ def pushSubmission(add_cnt: int):
         repo.git.commit("submissions/*", message="add submission: " + dt_now.strftime('%Y/%m/%d %H:%M:%S'))
         repo.git.push("origin", "main")
 
-        print(f"Finished process, added add_cnt files")
+        print(f"Finished process, added {add_cnt} files")
